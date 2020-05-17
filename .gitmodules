@@ -1,0 +1,36 @@
+[submodule "eigen"]
+	path = eigen
+	url = https://github.com/eigenteam/eigen-git-mirror
+[submodule "opencv"]
+	path = opencv
+	url = https://github.com/opencv/opencv.git
+[submodule "DBoW2"]
+	path = DBoW2
+	url = https://github.com/AaltoVision/DBoW2.git
+[submodule "suitesparse"]
+	path = suitesparse
+	url = https://github.com/DrTimothyAldenDavis/SuiteSparse.git
+[submodule "OpenBLAS"]
+	path = OpenBLAS
+	url = https://github.com/xianyi/OpenBLAS.git
+[submodule "ios-cmake"]
+	path = ios-cmake
+	url = https://github.com/leetal/ios-cmake.git
+[submodule "json"]
+	path = json
+	url = https://github.com/nlohmann/json.git
+[submodule "jsonl-recorder"]
+	path = jsonl-recorder
+	url = https://github.com/AaltoVision/jsonl-recorder
+[submodule "Theia"]
+	path = Theia
+	url = https://github.com/AaltoML/TheiaSfM
+[submodule "yaml-cpp"]
+	path = yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "Pangolin"]
+	path = Pangolin
+	url = https://github.com/stevenlovegrove/Pangolin.git
+[submodule "g2o"]
+	path = g2o
+	url = https://github.com/AaltoVision/g2o.git
