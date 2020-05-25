@@ -67,3 +67,5 @@ for TARGET_ARCHITECTURE in arm64-v8a armeabi-v7a; do
 
   ./scripts/build.sh "$@"
 done
+
+./scripts/android/combine.sh
