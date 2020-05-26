@@ -60,3 +60,5 @@ which generally [cannot be used in published apps on iOS nor Android](https://xe
 
 If you need to use these parts in commercial apps, check if the relevant SuiteSparse
 components can either be removed or try to procure an alternative license from their authors.
+
+The build scripts (that is `scripts` folder) in this repository are licensed under Apache 2.0.
