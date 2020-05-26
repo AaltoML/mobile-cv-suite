@@ -66,12 +66,22 @@ if (ANDROID)
     ${LIB_DIR}/libtegra_hal.a
     z) # zlib, required by OpenCV stuff
 else()
+  find_package(Threads REQUIRED)
   list(APPEND INTERFACE_LIBS
     ${LIB_DIR}/libopencv_highgui.so
-    ${LIB_DIR}/libpangolin.so)
+    ${LIB_DIR}/libpangolin.so
+    ${LIB_DIR}/libloguru.a
+    Threads::Threads)
+
+  # Linux needs more libraries for logging
+  find_library(DL_LIBRARY NAMES dl)
+  if (EXISTS ${DL_LIBRARY})
+    message(STATUS "the dl (dynamic linking) library ${DL_LIBRARY} exists, adding it for loguru")
+    list(APPEND INTERFACE_LIBS ${DL_LIBRARY})
+  endif()
+
   # not sure why OpenCV likes the folder opencv4/opencv2
-  list(APPEND INTERFACE_INCLUDES
-    ${INC_DIR}/opencv4)
+  list(APPEND INTERFACE_INCLUDES ${INC_DIR}/opencv4)
 endif()
 
 # Fortran may be needed on some platforms.

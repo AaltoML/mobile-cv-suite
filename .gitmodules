@@ -31,3 +31,6 @@
 [submodule "g2o"]
 	path = g2o
 	url = https://github.com/AaltoVision/g2o.git
+[submodule "loguru"]
+	path = loguru
+	url = https://github.com/emilk/loguru.git

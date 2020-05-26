@@ -66,6 +66,10 @@ source $SCRIPT_DIR/eigen.sh
 source $SCRIPT_DIR/theia.sh
 source $SCRIPT_DIR/jsonl-recorder.sh
 
+if [[ $BUILD_VISUALIZATIONS == "ON" ]]; then
+  source $SCRIPT_DIR/loguru/build.sh
+fi
+
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/yaml-cpp.sh
   if [ -z $IOS_CROSS_COMPILING_HACKS ]; then
