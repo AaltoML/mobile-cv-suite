@@ -64,6 +64,7 @@ fi
 
 source $SCRIPT_DIR/eigen.sh
 source $SCRIPT_DIR/theia.sh
+source $SCRIPT_DIR/jsonl-recorder.sh
 
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/yaml-cpp.sh
