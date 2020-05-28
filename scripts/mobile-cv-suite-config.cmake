@@ -8,7 +8,7 @@ if (ANDROID)
   set(_MCS_PREBUILT_DIR "${CMAKE_CURRENT_LIST_DIR}/build/android")
   set(_MCS_LIBS "${_MCS_PREBUILT_DIR}/lib/${ANDROID_ABI}")
 else()
-  set(_MCS_OPENCV_LIB_EXT "so")
+  string(SUBSTRING ${CMAKE_SHARED_LIBRARY_SUFFIX} 1 -1 _MCS_OPENCV_LIB_EXT)
   set(_MCS_PREBUILT_DIR "${CMAKE_CURRENT_LIST_DIR}/build/host")
   set(_MCS_LIBS "${_MCS_PREBUILT_DIR}/lib")
 endif()
@@ -69,9 +69,9 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libsuitesparseconfig.a
     ${_MCS_LIBS}/libyaml-cpp.a
     # --- shared
-    ${_MCS_LIBS}/libmetis.so
-    ${_MCS_LIBS}/libg2o_csparse_extension.so
-    ${_MCS_LIBS}/libsuitesparseconfig.so)
+    ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
+    ${_MCS_LIBS}/libg2o_csparse_extension${CMAKE_SHARED_LIBRARY_SUFFIX}
+    ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX})
 endif()
 
 if (ANDROID)
@@ -80,12 +80,13 @@ if (ANDROID)
     z) # zlib, required by OpenCV stuff
 else()
   if (_MCS_USE_SLAM)
-    list(APPEND _MCS_INTERFACE_LIBS ${_MCS_LIBS}/libpangolin.so)
+    find_package(Pangolin REQUIRED PATHS "${_MCS_LIBS}/cmake/Pangolin" NO_DEFAULT_PATH)
+    list(APPEND _MCS_INTERFACE_LIBS ${Pangolin_LIBRARIES})
   endif()
 
   find_package(Threads REQUIRED)
   list(APPEND _MCS_INTERFACE_LIBS
-    ${_MCS_LIBS}/libopencv_highgui.so
+    ${_MCS_LIBS}/libopencv_highgui${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libloguru.a
     Threads::Threads)
 
