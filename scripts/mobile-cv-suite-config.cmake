@@ -38,6 +38,12 @@ else()
   set(_MCS_USE_SLAM FALSE)
 endif()
 
+if (EXISTS ${_MCS_LIBS}/libpangolin.${_MCS_OPENCV_LIB_EXT})
+  set(_MCS_INCLUDE_VISUALIZATIONS TRUE)
+else()
+  set(_MCS_INCLUDE_VISUALIZATIONS FALSE)
+endif()
+
 if (_MCS_USE_SLAM)
   list(APPEND _MCS_INTERFACE_LIBS
     # --- static
@@ -79,7 +85,7 @@ if (ANDROID)
     ${_MCS_LIBS}/libtegra_hal.a
     z) # zlib, required by OpenCV stuff
 else()
-  if (_MCS_USE_SLAM)
+  if (_MCS_INCLUDE_VISUALIZATIONS)
     find_package(Pangolin REQUIRED PATHS "${_MCS_LIBS}/cmake/Pangolin" NO_DEFAULT_PATH)
     list(APPEND _MCS_INTERFACE_LIBS ${Pangolin_LIBRARIES})
   endif()
