@@ -93,3 +93,8 @@ if [[ $USE_SLAM == "ON" ]]; then
     source $SCRIPT_DIR/pangolin.sh
   fi
 fi
+
+# Ensure all libraries are under lib/, some systems place part of them under lib64/
+if [ -d "$BUILD_DIR/lib64" ]; then
+  cp -rf $BUILD_DIR/lib64/* $BUILD_DIR/lib/
+fi
