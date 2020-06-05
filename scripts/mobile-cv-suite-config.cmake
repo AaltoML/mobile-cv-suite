@@ -26,8 +26,8 @@ set(_MCS_INTERFACE_LIBS
   ${_MCS_LIBS}/libopencv_video.${_MCS_OPENCV_LIB_EXT}
   ${_MCS_LIBS}/libopencv_calib3d.${_MCS_OPENCV_LIB_EXT}
   ${_MCS_LIBS}/libopencv_features2d.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_imgproc.${_MCS_OPENCV_LIB_EXT}
   ${_MCS_LIBS}/libopencv_imgcodecs.${_MCS_OPENCV_LIB_EXT}
+  ${_MCS_LIBS}/libopencv_imgproc.${_MCS_OPENCV_LIB_EXT}
   ${_MCS_LIBS}/libopencv_flann.${_MCS_OPENCV_LIB_EXT}
   ${_MCS_LIBS}/libopencv_core.${_MCS_OPENCV_LIB_EXT}
 )
