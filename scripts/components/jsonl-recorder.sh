@@ -14,5 +14,7 @@ $CMAKE $CMAKE_FLAGS \
     -DJSON_MultipleHeaders=ON \
     -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DUSE_OPENCV_VIDEO_RECORDING=ON \
+    -DOpenCV_DIR="$OPENCV_DIR" \
     "$SRC_DIR/jsonl-recorder"
 $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
