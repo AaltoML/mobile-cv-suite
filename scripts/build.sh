@@ -64,7 +64,6 @@ fi
 
 source $SCRIPT_DIR/eigen.sh
 source $SCRIPT_DIR/theia.sh
-source $SCRIPT_DIR/jsonl-recorder.sh
 
 if [[ $TARGET_ARCHITECTURE == "host" ]]; then
   source $SCRIPT_DIR/loguru/build.sh
@@ -86,6 +85,8 @@ if [[ $OPENCV_DIR ]]; then
 else
   source $SCRIPT_DIR/opencv.sh
 fi
+
+source $SCRIPT_DIR/jsonl-recorder.sh
 
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/dbow2.sh
