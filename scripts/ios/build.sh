@@ -49,9 +49,6 @@ for TARGET_ARCHITECTURE in arm64; do
 
   export USE_SLAM
 
-  # If we enable clear for ./scripts/build.sh, it will nuke OpenCV build we just did
-  export DO_CLEAR=OFF
-
   # Pangolin visualizations aren't needed
   export BUILD_VISUALIZATIONS=OFF
 

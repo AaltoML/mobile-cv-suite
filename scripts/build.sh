@@ -80,12 +80,7 @@ if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/g2o.sh
 fi
 
-if [[ $OPENCV_DIR ]]; then
-  echo "using OpenCV in $OPENCV_DIR"
-else
-  source $SCRIPT_DIR/opencv.sh
-fi
-
+source $SCRIPT_DIR/opencv.sh
 source $SCRIPT_DIR/jsonl-recorder.sh
 
 if [[ $USE_SLAM == "ON" ]]; then

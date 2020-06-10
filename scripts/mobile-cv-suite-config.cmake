@@ -58,11 +58,9 @@ if (_MCS_USE_SLAM)
   list(APPEND _MCS_INTERFACE_LIBS
     # --- static
     ${_MCS_LIBS}/libamd.a
-    ${_MCS_LIBS}/libbtf${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libcamd.a
     ${_MCS_LIBS}/libccolamd.a
     ${_MCS_LIBS}/libcolamd.a
-    ${_MCS_LIBS}/libcxsparse${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libdbow2.a
     ${_MCS_LIBS}/libg2o_core.a
     ${_MCS_LIBS}/libg2o_solver_csparse.a
@@ -81,14 +79,17 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libg2o_types_slam2d_addons.a
     ${_MCS_LIBS}/libg2o_types_slam3d.a
     ${_MCS_LIBS}/libg2o_types_slam3d_addons.a
-    ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libyaml-cpp.a
     # --- shared
+    # libbtf and cxsparse are LGPL licensed, so they must be used as shared libraries
+    ${_MCS_LIBS}/libbtf${CMAKE_SHARED_LIBRARY_SUFFIX}
+    ${_MCS_LIBS}/libcxsparse${CMAKE_SHARED_LIBRARY_SUFFIX}
+    ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libg2o_csparse_extension${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX})
 endif()
 
-if(NOT(IOS_CROSS_COMPILING_HACKS))
+if(NOT(IOS))
   list(APPEND _MCS_INTERFACE_LIBS
     ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libopenblas.a
