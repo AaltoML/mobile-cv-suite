@@ -45,8 +45,15 @@ for TARGET_ARCHITECTURE in arm64; do
   export UNAME=Darwin
   export LAPACK=''
 
-  export OPENCV_DIR=$BUILD_DIR/opencv/build/build-$TARGET_ARCHITECTURE-iphoneos/install
+  export OPENCV_DIR=$BUILD_DIR/lib/opencv/build/build-$TARGET_ARCHITECTURE-iphoneos/install
 
   export USE_SLAM
+
+  # If we enable clear for ./scripts/build.sh, it will nuke OpenCV build we just did
+  export DO_CLEAR=OFF
+
+  # Pangolin visualizations aren't needed
+  export BUILD_VISUALIZATIONS=OFF
+
   ./scripts/build.sh "$@"
 done

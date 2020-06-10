@@ -58,7 +58,13 @@ if [ $IOS_CROSS_COMPILING_HACKS ]; then
     lib=$(find . | cut -c3- | grep "lib$short_lib\.\d\.\d\.\d\.dylib")
     install_name_tool -id @rpath/$lib $lib
     install_name_tool -add_rpath @rpath/. $lib
-    install_name_tool -change "$(pwd)/$config" @rpath/$config $lib
+    # Name could be libsuitesparseconfig.5.dylib for example, just find any *libsuitesparseconfig.*dylib
+    name_to_change=$(otool -l $lib | grep ".*libsuitesparseconfig\..*dylib" | tr -s " " | cut -f3 -d " ")
+    if [ -z "${name_to_change}" ]; then
+      echo "Couldn't find libsuitesparseconfig for $lib, please check it with: otool -l $lib | grep \".*libsuitesparseconfig\..*dylib\""
+      exit 1
+    fi
+    install_name_tool -change $name_to_change @rpath/$config $lib
   done
   # Also change paths of the config lib.
   install_name_tool -id @rpath/$config $config

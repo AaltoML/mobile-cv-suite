@@ -9,7 +9,7 @@ if (ANDROID)
   set(_MCS_LIBS "${_MCS_PREBUILT_DIR}/lib/${ANDROID_ABI}")
 else()
   string(SUBSTRING ${CMAKE_SHARED_LIBRARY_SUFFIX} 1 -1 _MCS_OPENCV_LIB_EXT)
-  set(_MCS_PREBUILT_DIR "${CMAKE_CURRENT_LIST_DIR}/build/host")
+  set(_MCS_PREBUILT_DIR "${CMAKE_CURRENT_LIST_DIR}/build/${TARGET_ARCH}")
   set(_MCS_LIBS "${_MCS_PREBUILT_DIR}/lib")
 endif()
 
@@ -21,16 +21,26 @@ set(_MCS_INTERFACE_INCLUDES
 set(_MCS_INTERFACE_LIBS
   # --- static
   ${_MCS_LIBS}/libtheia.a
-  # --- opencv
-  ${_MCS_LIBS}/libopencv_videoio.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_video.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_calib3d.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_features2d.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_imgcodecs.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_imgproc.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_flann.${_MCS_OPENCV_LIB_EXT}
-  ${_MCS_LIBS}/libopencv_core.${_MCS_OPENCV_LIB_EXT}
 )
+
+# --- opencv
+if((DEFINED OpenCV_DIR) AND IOS)
+  message("OpenCV iOS framework")
+  # Relies on custom "OpenCVConfig.cmake" placed at $OpenCV_DIR.
+  find_package(OpenCV 4 REQUIRED PATHS ${OpenCV_DIR})
+  list(APPEND _MCS_INTERFACE_LIBS ${OpenCV_LIBS})
+else()
+  list(APPEND _MCS_INTERFACE_LIBS
+    ${_MCS_LIBS}/libopencv_videoio.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_video.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_calib3d.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_features2d.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_imgcodecs.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_imgproc.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_flann.${_MCS_OPENCV_LIB_EXT}
+    ${_MCS_LIBS}/libopencv_core.${_MCS_OPENCV_LIB_EXT}
+  )
+endif()
 
 if (EXISTS ${_MCS_LIBS}/libamd.a)
   set(_MCS_USE_SLAM TRUE)
@@ -48,11 +58,11 @@ if (_MCS_USE_SLAM)
   list(APPEND _MCS_INTERFACE_LIBS
     # --- static
     ${_MCS_LIBS}/libamd.a
-    ${_MCS_LIBS}/libbtf.a
+    ${_MCS_LIBS}/libbtf${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libcamd.a
     ${_MCS_LIBS}/libccolamd.a
     ${_MCS_LIBS}/libcolamd.a
-    ${_MCS_LIBS}/libcxsparse.a
+    ${_MCS_LIBS}/libcxsparse${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libdbow2.a
     ${_MCS_LIBS}/libg2o_core.a
     ${_MCS_LIBS}/libg2o_solver_csparse.a
@@ -71,19 +81,26 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libg2o_types_slam2d_addons.a
     ${_MCS_LIBS}/libg2o_types_slam3d.a
     ${_MCS_LIBS}/libg2o_types_slam3d_addons.a
-    ${_MCS_LIBS}/libopenblas.a
-    ${_MCS_LIBS}/libsuitesparseconfig.a
+    ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libyaml-cpp.a
     # --- shared
-    ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libg2o_csparse_extension${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX})
+endif()
+
+if(NOT(IOS_CROSS_COMPILING_HACKS))
+  list(APPEND _MCS_INTERFACE_LIBS
+    ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
+    ${_MCS_LIBS}/libopenblas.a
+  )
 endif()
 
 if (ANDROID)
   list(APPEND _MCS_INTERFACE_LIBS
     ${_MCS_LIBS}/libtegra_hal.a
     z) # zlib, required by OpenCV stuff
+elseif(IOS)
+  # iOS stuff here if needed
 else()
   if (_MCS_INCLUDE_VISUALIZATIONS)
     find_package(Pangolin REQUIRED PATHS "${_MCS_LIBS}/cmake/Pangolin" NO_DEFAULT_PATH)
