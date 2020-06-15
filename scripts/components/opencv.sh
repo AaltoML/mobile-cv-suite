@@ -22,6 +22,12 @@ if [[ $IOS_CROSS_COMPILING_HACKS == "ON" ]]; then
     cp "$ROOT_DIR"/scripts/ios/"$file" $BUILD_DIR/lib/opencv/build/build-"$TARGET_ARCHITECTURE"-iphoneos/install/
   done
 
+elif [[ $ANDROID_CROSS_COMPILING_HACKS == "ON" ]]; then
+  # TODO: Move OpenCV build here?
+  if [[ -z $OPENCV_DIR ]]; then
+    echo "WARNING! OpenCV should have been built previously!"
+    exit 1
+  fi
 else
   CUR_DIR=$WORK_DIR/opencv
 
