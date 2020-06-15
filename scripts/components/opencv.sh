@@ -23,11 +23,17 @@ if [[ $IOS_CROSS_COMPILING_HACKS == "ON" ]]; then
   done
 
 elif [[ $ANDROID_CROSS_COMPILING_HACKS == "ON" ]]; then
-  # TODO: Move OpenCV build here?
+  # Build OpenCV only once
   if [[ -z $OPENCV_DIR ]]; then
-    echo "WARNING! OpenCV should have been built previously!"
-    exit 1
+    cd "$ROOT_DIR"
+    cp scripts/android/opencv.config.py opencv/platforms/android
+    cd opencv/platforms/android
+    CMAKE_FLAGS="" CC="" CXX="" CXX_FLAGS="" LDFLAGS="" python2 build_sdk.py --no_samples_build --config="opencv.config.py" "$ROOT_DIR/build/opencv-sdk"
+    rm opencv.config.py
+    cd "$ROOT_DIR"
+    OPENCV_DIR=$ROOT_DIR/build/opencv-sdk/OpenCV-android-sdk/sdk/native/jni
   fi
+
 else
   CUR_DIR=$WORK_DIR/opencv
 
