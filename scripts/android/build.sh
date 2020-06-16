@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-: "${BUILD_OPENCV:=ON}"
+: "${BUILD_EIGEN:=ON}"
 : "${USE_SLAM:=ON}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -17,18 +17,14 @@ else
     exit 1
 fi
 
-ROOT_DIR=`pwd`
-
-# First, build OpenCV
-if [[ $BUILD_OPENCV == "ON" ]]; then
-  cp scripts/android/opencv.config.py opencv/platforms/android
-  cd opencv/platforms/android
-  python2 build_sdk.py --no_samples_build --config="opencv.config.py" "$ROOT_DIR/build/opencv-sdk"
-  rm opencv.config.py
-  cd "$ROOT_DIR"
+# Build Eigen
+# TODO: Move to component/eigen.sh
+if [[ $BUILD_EIGEN == "ON" ]]; then
+  ./scripts/build.sh eigen
 fi
 
-export OPENCV_DIR=$ROOT_DIR/build/opencv-sdk/OpenCV-android-sdk/sdk/native/jni
+ROOT_DIR=`pwd`
+
 export BUILD_VISUALIZATIONS=OFF
 export ANDROID_CROSS_COMPILING_HACKS=ON
 

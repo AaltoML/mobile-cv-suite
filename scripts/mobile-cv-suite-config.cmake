@@ -89,8 +89,12 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libsuitesparseconfig${CMAKE_SHARED_LIBRARY_SUFFIX})
 
   if(NOT(IOS))
+    if(NOT(ANDROID))
+      list(APPEND _MCS_INTERFACE_LIBS
+        ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
+      )
+    endif()
     list(APPEND _MCS_INTERFACE_LIBS
-      ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
       ${_MCS_LIBS}/libopenblas.a
     )
   endif()
