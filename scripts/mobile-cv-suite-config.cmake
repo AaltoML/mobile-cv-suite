@@ -90,9 +90,10 @@ if (_MCS_USE_SLAM)
 
   if(NOT(IOS))
     if(NOT(ANDROID))
-      list(APPEND _MCS_INTERFACE_LIBS
-        ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
-      )
+      message(STATUS "WARNING METIS DISABLED!")
+      #list(APPEND _MCS_INTERFACE_LIBS
+      #  ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
+      #)
     endif()
     if (EXISTS ${_MCS_LIBS}/libopenblas.a)
       list(APPEND _MCS_INTERFACE_LIBS
