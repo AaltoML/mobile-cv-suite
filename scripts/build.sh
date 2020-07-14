@@ -73,7 +73,7 @@ if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/yaml-cpp.sh
   if [ -z $IOS_CROSS_COMPILING_HACKS ]; then
     # iOS uses Accelerate framework instead.
-    source $SCRIPT_DIR/openblas.sh
+    #source $SCRIPT_DIR/openblas.sh
   fi
   cd $ROOT_DIR
   source $SCRIPT_DIR/suitesparse.sh

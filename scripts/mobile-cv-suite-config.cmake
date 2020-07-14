@@ -94,9 +94,14 @@ if (_MCS_USE_SLAM)
         ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
       )
     endif()
-    list(APPEND _MCS_INTERFACE_LIBS
-      ${_MCS_LIBS}/libopenblas.a
-    )
+    if (EXISTS ${_MCS_LIBS}/libopenblas.a)
+      list(APPEND _MCS_INTERFACE_LIBS
+        ${_MCS_LIBS}/libopenblas.a
+      )
+    else()
+      find_package(BLAS)
+      list(APPEND _MCS_INTERFACE_LIBS ${BLAS_LIBRARIES})
+    endif()
   endif()
 endif()
 
