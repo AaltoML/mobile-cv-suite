@@ -1,0 +1,14 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Build for Linux
+      run: |
+        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
