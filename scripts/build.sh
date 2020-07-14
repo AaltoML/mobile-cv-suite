@@ -13,6 +13,7 @@ set -e
 
 : "${TARGET_ARCHITECTURE:=host}"
 : "${BUILD_VISUALIZATIONS:=ON}"
+: "${OPENBLAS:=ON}"
 : "${CMAKE:=cmake}"
 : "${CC:=clang}"
 : "${CXX:=clang++}"
@@ -71,8 +72,8 @@ fi
 
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/yaml-cpp.sh
-  if [ -z $IOS_CROSS_COMPILING_HACKS ]; then
-    # iOS uses Accelerate framework instead.
+  if [[ -z $IOS_CROSS_COMPILING_HACKS && $OPENBLAS == "ON" ]]; then
+    # iOS uses Accelerate framework instead. Triton uses prebuilt one and has OPENBLAS == OFF.
     source $SCRIPT_DIR/openblas.sh
   fi
   cd $ROOT_DIR
