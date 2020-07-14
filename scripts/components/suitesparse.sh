@@ -21,7 +21,7 @@ if [[ $SUITESPARSE_CF ]]; then
 fi
 
 # No metis for iOS or Android
-if [ -z $IOS_CROSS_COMPILING_HACKS && -z $ANDROID_CROSS_COMPILING_HACKS ]; then
+if [[ -z $IOS_CROSS_COMPILING_HACKS && -z $ANDROID_CROSS_COMPILING_HACKS ]]; then
   make metisinstall "${SUITESPARSE_FLAGS[@]}"
 fi
 
