@@ -11,4 +11,4 @@ jobs:
         submodules: recursive
     - name: Build for Linux
       run: |
-        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+        DO_CLEAR=OFF USE_SLAM=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
