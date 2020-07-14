@@ -74,6 +74,7 @@ if [[ $USE_SLAM == "ON" ]]; then
   if [ -z $IOS_CROSS_COMPILING_HACKS ]; then
     # iOS uses Accelerate framework instead.
     #source $SCRIPT_DIR/openblas.sh
+    echo "WARNING OpenBLAS DISABLED"
   fi
   cd $ROOT_DIR
   source $SCRIPT_DIR/suitesparse.sh
