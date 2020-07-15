@@ -1,7 +1,7 @@
 #!/bin/bash
 # OpenBLAS (SuiteSparse dependency)
 CUR_DIR=$WORK_DIR/OpenBLAS
-: "${OPENBLAS_CMAKE_FLAGS:=-DCMAKE_C_FLAGS=-DFORCE_HASWELL}"
+: "${OPENBLAS_CMAKE_FLAGS:=-DDYNAMIC_ARCH=ON}"
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then
   rm -r "$CUR_DIR"
