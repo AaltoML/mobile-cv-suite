@@ -1,0 +1,25 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Install GFortran
+      run: |
+        sudo apt-get update
+        sudo apt-get install gfortran
+    - name: Build for Linux
+      run: |
+        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+    - name: Package Linux
+      run: ./scripts/package.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: linux-build
+        path: |
+          build/mobile-cv-suite.tar.gz
