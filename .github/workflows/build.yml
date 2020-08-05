@@ -10,7 +10,7 @@ jobs:
       with:
         submodules: recursive
     - name: Install Android NDK
-      run: echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
+      run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669'
     - name: Install GFortran
       run: |
         sudo apt-get update
