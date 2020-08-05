@@ -17,6 +17,9 @@ else
     exit 1
 fi
 
+export BUILD_VISUALIZATIONS=OFF
+export ANDROID_CROSS_COMPILING_HACKS=ON
+
 # Build Eigen
 # TODO: Move to component/eigen.sh
 if [[ $BUILD_EIGEN == "ON" ]]; then
@@ -24,9 +27,6 @@ if [[ $BUILD_EIGEN == "ON" ]]; then
 fi
 
 ROOT_DIR=`pwd`
-
-export BUILD_VISUALIZATIONS=OFF
-export ANDROID_CROSS_COMPILING_HACKS=ON
 
 # Then build the other dependencies for each architecture
 export CMAKE=($ANDROID_HOME/cmake/*/bin/cmake)
