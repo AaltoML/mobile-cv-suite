@@ -4,9 +4,9 @@ set -ex
 : "${USE_SLAM:=ON}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    : "${ANDROID_HOME:=~/Android/Sdk}"
+    : "${ANDROID_HOME:=$HOME/Android/Sdk}"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    : "${ANDROID_HOME:=~/Library/Android/sdk}"
+    : "${ANDROID_HOME:=$HOME/Library/Android/sdk}"
 else
     echo "unrecognized OSTYPE $OSTYPE"
     exit 1
