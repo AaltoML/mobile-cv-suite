@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 : "${BUILD_EIGEN:=ON}"
 : "${USE_SLAM:=ON}"
