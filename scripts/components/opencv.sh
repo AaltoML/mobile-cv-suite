@@ -55,6 +55,7 @@ else
   #   * Other unused stuff: Quirc (QR-codes), Protobuf support
   #
   $CMAKE $CMAKE_FLAGS \
+    -DCMAKE_PREFIX_PATH="$INSTALL_PREFIX" \
     -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
     -DBUILD_LIST=core,calib3d,features2d,highgui,video,videoio \
     -DWITH_TIFF=OFF -DWITH_JASPER=OFF -DWITH_JPEG=OFF -DWITH_WEBP=OFF -DWITH_OPENEXR=OFF \
