@@ -3,17 +3,16 @@ set -ex
 : "${USE_SLAM:=ON}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    export ANDROID_HOME=~/Android/Sdk
-    export ANDROID_NDK=~/Android/Sdk/ndk-bundle
-    export ANDROID_SDK=~/Android/Sdk
+    : "${ANDROID_HOME:=~/Android/Sdk}"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    export ANDROID_HOME=~/Library/Android/sdk
-    export ANDROID_SDK=~/Library/Android/sdk
-    export ANDROID_NDK=~/Library/Android/sdk/ndk-bundle
+    : "${ANDROID_HOME:=~/Library/Android/sdk}"
 else
     echo "unrecognized OSTYPE $OSTYPE"
     exit 1
 fi
+export ANDROID_HOME
+export ANDROID_SDK="$ANDROID_HOME"
+export ANDROID_NDK="$ANDROID_HOME/ndk-bundle"
 
 export BUILD_VISUALIZATIONS=OFF
 export ANDROID_CROSS_COMPILING_HACKS=ON
