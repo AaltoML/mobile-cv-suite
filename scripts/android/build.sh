@@ -1,7 +1,5 @@
 #!/bin/bash
 set -ex
-
-: "${BUILD_EIGEN:=ON}"
 : "${USE_SLAM:=ON}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -19,12 +17,6 @@ fi
 
 export BUILD_VISUALIZATIONS=OFF
 export ANDROID_CROSS_COMPILING_HACKS=ON
-
-# Build Eigen
-# TODO: Move to component/eigen.sh
-if [[ $BUILD_EIGEN == "ON" ]]; then
-  ./scripts/build.sh eigen
-fi
 
 ROOT_DIR=`pwd`
 
