@@ -15,12 +15,12 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install gfortran
-    - name: Build for Android
-      run: |
-        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/android/build.sh
     - name: Build for Linux
       run: |
         DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+    - name: Build for Android
+      run: |
+        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/android/build.sh
     - name: Package Linux
       run: ./scripts/package.sh
     - uses: actions/upload-artifact@v2
