@@ -1,5 +1,6 @@
 #!/bin/bash
 set -ex
+: "${BUILD_EIGEN:=ON}"
 : "${USE_SLAM:=ON}"
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
