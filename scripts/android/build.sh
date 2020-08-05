@@ -14,10 +14,16 @@ export ANDROID_HOME
 export ANDROID_SDK="$ANDROID_HOME"
 export ANDROID_NDK="$ANDROID_HOME/ndk-bundle"
 
-export BUILD_VISUALIZATIONS=OFF
-export ANDROID_CROSS_COMPILING_HACKS=ON
+# Build Eigen
+# TODO: Move to component/eigen.sh
+if [[ $BUILD_EIGEN == "ON" ]]; then
+  ./scripts/build.sh eigen
+fi
 
 ROOT_DIR=`pwd`
+
+export BUILD_VISUALIZATIONS=OFF
+export ANDROID_CROSS_COMPILING_HACKS=ON
 
 # Then build the other dependencies for each architecture
 export CMAKE=($ANDROID_HOME/cmake/*/bin/cmake)
