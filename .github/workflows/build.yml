@@ -28,3 +28,15 @@ jobs:
         name: build-manual
         path: |
           build/mobile-cv-suite.tar.gz
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: |
+          build/host/include/
+          build/host/lib/*.a*
+          build/host/lib/*.so*
+          build/host/share/doc
+          build/host/share/licenses
+          build/android
+          scripts/mobile-cv-suite-config.cmake
+          mobile-cv-suite-config.cmake
