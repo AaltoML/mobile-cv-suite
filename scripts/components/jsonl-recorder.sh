@@ -18,3 +18,6 @@ $CMAKE $CMAKE_FLAGS \
     -DOpenCV_DIR="$OPENCV_DIR" \
     "$SRC_DIR/jsonl-recorder"
 $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
+
+cp "$SRC_DIR/jsonl-recorder/LICENSE" $LICENSE_DIR/jsonl-recorder.txt
+cp "$SRC_DIR/json/LICENSE.MIT" $LICENSE_DIR/json.txt

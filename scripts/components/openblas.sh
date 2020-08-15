@@ -14,3 +14,5 @@ $CMAKE $CMAKE_FLAGS $OPENBLAS_CMAKE_FLAGS \
     -DUSE_THREAD=OFF \
     "$SRC_DIR/OpenBLAS"
 $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
+
+cp "$SRC_DIR/OpenBLAS/LICENSE" $LICENSE_DIR/OpenBLAS.txt

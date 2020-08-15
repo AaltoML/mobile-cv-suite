@@ -32,3 +32,5 @@ if [ $IOS_CROSS_COMPILING_HACKS ]; then
   cd $INSTALL_PREFIX/lib
   install_name_tool -id @rpath/libg2o_csparse_extension.dylib libg2o_csparse_extension.dylib
 fi
+
+cp "$SRC_DIR/g2o/doc/license-bsd.txt" $LICENSE_DIR/g2o.txt

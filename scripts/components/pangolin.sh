@@ -10,3 +10,5 @@ mkdir -p "$CUR_DIR"
 cd "$CUR_DIR"
 $CMAKE $CMAKE_FLAGS -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" "$SRC_DIR/Pangolin"
 make -j$NPROC install
+
+cp "$SRC_DIR/Pangolin/LICENCE" $LICENSE_DIR/Pangolin.txt

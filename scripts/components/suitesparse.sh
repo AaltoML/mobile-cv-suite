@@ -8,6 +8,7 @@ if [[ $DO_CLEAR == "ON" ]]; then
   rm -rf "$SRC_DIR/suitesparse" && git submodule update "$SRC_DIR/suitesparse"
 fi
 
+ABS_LICENSE_DIR=`realpath $LICENSE_DIR`
 cd "$SRC_DIR/suitesparse"
 SUITESPARSE_FLAGS=(
   CUDA=no
@@ -24,6 +25,8 @@ fi
 if [[ -z $IOS_CROSS_COMPILING_HACKS && -z $ANDROID_CROSS_COMPILING_HACKS ]]; then
   make metisinstall "${SUITESPARSE_FLAGS[@]}"
 fi
+cp metis-5.1.0/LICENSE.txt $ABS_LICENSE_DIR/METIS_LICENSE.txt
+cp metis-5.1.0/README.txt $ABS_LICENSE_DIR/METIS_README.txt
 
 # Metis: Apache 2
 # AMD, CAMD, COLAMD, CCOLAMD: BSD
@@ -47,6 +50,7 @@ for lib in AMD BTF CAMD CCOLAMD COLAMD CXSparse; do
   if [ $ANDROID_CROSS_COMPILING_HACKS ]; then
     python "$ROOT_DIR/scripts/android/drop_library_soname_suffixes.py" "$INSTALL_PREFIX/lib"
   fi
+  cp Doc/License.txt $ABS_LICENSE_DIR/${lib}.txt
   cd ..
 done
 

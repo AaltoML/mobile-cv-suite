@@ -70,8 +70,6 @@ else
 
 fi
 
-
-
-
-
-
+if [[ $TARGET_ARCHITECTURE == "host" ]]; then
+  cp -R $BUILD_DIR/share/licenses/opencv4 $LICENSE_DIR
+fi

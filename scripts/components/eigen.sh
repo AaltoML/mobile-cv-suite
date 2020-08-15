@@ -35,3 +35,9 @@ else
       "$SRC_DIR/eigen"
   $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
 fi
+
+mkdir -p $LICENSE_DIR/Eigen
+cp "$SRC_DIR/eigen/COPYING.MPL2" $LICENSE_DIR/Eigen
+cp "$SRC_DIR/eigen/COPYING.MINPACK" $LICENSE_DIR/Eigen # stuff in the unsupported/ dir
+# warning: there is an LGPL-licensed header included: Eigen/src/IterativeLinearSolvers/IncompleteLUT.h
+cp "$SRC_DIR/eigen/COPYING.LGPL" $LICENSE_DIR/Eigen
