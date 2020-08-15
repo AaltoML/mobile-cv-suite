@@ -21,22 +21,10 @@ jobs:
     - name: Build for Android
       run: |
         BUILD_VISUALIZATIONS=OFF BUILD_EIGEN=OFF ./scripts/android/build.sh
-    - name: Package (manual)
+    - name: Package
       run: ./scripts/package.sh
     - uses: actions/upload-artifact@v2
       with:
-        name: build-manual
+        name: artifacts
         path: |
           build/mobile-cv-suite.tar.gz
-    - uses: actions/upload-artifact@v2
-      with:
-        name: build
-        path: |
-          build/host/include/
-          build/host/lib/*.a*
-          build/host/lib/*.so*
-          build/host/share/doc
-          build/host/share/licenses
-          build/android
-          scripts/mobile-cv-suite-config.cmake
-          mobile-cv-suite-config.cmake
