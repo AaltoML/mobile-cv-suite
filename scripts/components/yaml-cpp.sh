@@ -20,3 +20,5 @@ if [ -f "$INSTALL_PREFIX/lib64/libyaml-cpp.a" ]; then
   mkdir -p "$INSTALL_PREFIX/lib"
   cp "$INSTALL_PREFIX/lib64/libyaml-cpp.a" "$INSTALL_PREFIX/lib/libyaml-cpp.a"
 fi
+
+cp "$SRC_DIR/yaml-cpp/LICENSE" $LICENSE_DIR/yaml-cpp.txt

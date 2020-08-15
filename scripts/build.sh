@@ -30,10 +30,12 @@ export CXX
 
 ROOT_DIR=`pwd`
 BUILD_DIR=$ROOT_DIR/build/$TARGET_ARCHITECTURE
+LICENSE_DIR=$ROOT_DIR/build/licenses
 WORK_DIR=$BUILD_DIR/work
 SRC_DIR=$ROOT_DIR
 SCRIPT_DIR=$ROOT_DIR/scripts/components
 
+mkdir -p $LICENSE_DIR
 INSTALL_PREFIX=$BUILD_DIR
 
 if [ "$#" -ge 1 ]; then

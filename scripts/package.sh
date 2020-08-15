@@ -5,7 +5,7 @@ set -eux
 DIR=build
 (find $DIR/host/include/ \
   && find $DIR/host/lib/ -name "*.a*" -o -name "*.so*" \
-  && find $DIR/host/share/doc/ -type f && find $DIR/host/share/licenses/ -type f \
+  && find $DIR/licenses/ -type f \
   && find $DIR/android/ -type f \
   && echo scripts/mobile-cv-suite-config.cmake && \
   echo mobile-cv-suite-config.cmake) | \

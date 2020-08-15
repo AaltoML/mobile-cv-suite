@@ -14,3 +14,6 @@ $CMAKE $CMAKE_FLAGS \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     "$SRC_DIR/scripts/components/loguru"
 $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
+
+# License: public domain
+cp "$SRC_DIR/loguru/README.md" $LICENSE_DIR/Loguru.md
