@@ -55,6 +55,8 @@ else()
 endif()
 
 if (_MCS_USE_SLAM)
+  set(_MCS_G2O_SUFFIX ${CMAKE_SHARED_LIBRARY_SUFFIX})
+  #set(_MCS_G2O_SUFFIX ".a")
   list(APPEND _MCS_INTERFACE_LIBS
     # --- static
     ${_MCS_LIBS}/libamd.a
@@ -62,23 +64,23 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libccolamd.a
     ${_MCS_LIBS}/libcolamd.a
     ${_MCS_LIBS}/libdbow2.a
-    ${_MCS_LIBS}/libg2o_core.a
-    ${_MCS_LIBS}/libg2o_solver_csparse.a
-    ${_MCS_LIBS}/libg2o_solver_dense.a
-    ${_MCS_LIBS}/libg2o_solver_eigen.a
-    ${_MCS_LIBS}/libg2o_solver_pcg.a
-    ${_MCS_LIBS}/libg2o_solver_slam2d_linear.a
-    ${_MCS_LIBS}/libg2o_solver_structure_only.a
-    ${_MCS_LIBS}/libg2o_stuff.a
-    ${_MCS_LIBS}/libg2o_types_data.a
-    ${_MCS_LIBS}/libg2o_types_icp.a
-    ${_MCS_LIBS}/libg2o_types_sba.a
-    ${_MCS_LIBS}/libg2o_types_sclam2d.a
-    ${_MCS_LIBS}/libg2o_types_sim3.a
-    ${_MCS_LIBS}/libg2o_types_slam2d.a
-    ${_MCS_LIBS}/libg2o_types_slam2d_addons.a
-    ${_MCS_LIBS}/libg2o_types_slam3d.a
-    ${_MCS_LIBS}/libg2o_types_slam3d_addons.a
+    ${_MCS_LIBS}/libg2o_core${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_csparse${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_dense${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_eigen${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_pcg${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_slam2d_linear${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_solver_structure_only${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_stuff${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_data${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_icp${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_sba${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_sclam2d${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_sim3${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_slam2d${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_slam2d_addons${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_slam3d${_MCS_G2O_SUFFIX}
+    ${_MCS_LIBS}/libg2o_types_slam3d_addons${_MCS_G2O_SUFFIX}
     ${_MCS_LIBS}/libyaml-cpp.a
     # --- shared
     # libbtf and cxsparse are LGPL licensed, so they must be used as shared libraries
