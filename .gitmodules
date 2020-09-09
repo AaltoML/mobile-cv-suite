@@ -34,3 +34,6 @@
 [submodule "loguru"]
 	path = loguru
 	url = https://github.com/emilk/loguru.git
+[submodule "cereal"]
+	path = cereal
+	url = https://github.com/USCiLab/cereal.git
