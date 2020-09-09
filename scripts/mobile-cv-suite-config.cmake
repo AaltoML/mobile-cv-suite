@@ -141,8 +141,6 @@ if (EXISTS ${GFORTRAN_LIBRARY})
   list(APPEND _MCS_INTERFACE_LIBS ${GFORTRAN_LIBRARY})
 endif()
 
-list(APPEND _MCS_INTERFACE_INCLUDES "${CMAKE_CURRENT_LIST_DIR}/cereal/include")
-
 set_target_properties(mobile-cv-suite PROPERTIES
     IMPORTED_LOCATION "${_MCS_LIBS}/libjsonl-recorder.a" # any library will do
     IMPORTED_LINK_INTERFACE_LIBRARIES "${_MCS_INTERFACE_LIBS}"
