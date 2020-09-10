@@ -4,55 +4,46 @@ on mobile & embedded devices.
 
 ## Usage
 
+### Pre-built library (Android only)
+
+This is the recommended method, when available, since it can dramatically
+reduce the build time of the dependent application.
+
+Example usage in `MakeLists.txt`:
+```CMake
+set(MCS_VERSION 1.1.1) # The library version you wish to use (see "releases")
+set(MCS_TARGET_DIR ${ROOT_DIR}/app/.cxx/mobile-cv-suite-${MCS_VERSION})
+if(NOT EXISTS ${MCS_TARGET_DIR})
+    set(MCS_ARCHIVE_FN ${CMAKE_CURRENT_BINARY_DIR}/mobile-cv-suite.tar-${MCS_VERSION}.gz)
+    file(DOWNLOAD https://github.com/AaltoML/mobile-cv-suite/releases/download/${MCS_VERSION}/mobile-cv-suite.tar.gz ${MCS_ARCHIVE_FN} SHOW_PROGRESS)
+    file(MAKE_DIRECTORY ${MCS_TARGET_DIR})
+    execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf ${MCS_ARCHIVE_FN} WORKING_DIRECTORY ${MCS_TARGET_DIR})
+endif()
+set(mobile-cv-suite_DIR "${MCS_TARGET_DIR}")
+
+find_package(mobile-cv-suite)
+
+# use as a dependency
+target_link_libraries(your_target PUBLIC mobile-cv-suite)
+```
+
+### Building from source
+
 First, the library needs to be built for the target system. One of
 
  * `./scripts/build.sh` the host system (your computer)
  * `./script/android/build.sh` ARM-based Android phones (i.e., not emulators / x86)
- * `./script/ios/build.sh` iOS phones (TODO)
+ * `./script/ios/build.sh` iOS phones
 
-### CMake
+Then the library suite can be linked to a CMake project as follows
 
-```cmake
+```CMake
 find_package(mobile-cv-suite REQUIRED PATHS /path/to/this/folder)
 # use as a dependency
 target_link_libraries(your_target PUBLIC mobile-cv-suite)
 ```
 
-### Android
-
-Add the dependency to your CMake _external native build_ as instructed above
-and also add the following to the `build.gradle` file of your app
-```groovy
-android {
-    // ...
-    sourceSets {
-        main {
-            jniLibs.srcDirs '/PATH/TO/THIS/FOLDER/build/android/lib'
-        }
-    }
-
-    defaultConfig {
-        // ...
-        externalNativeBuild {
-            cmake {
-                // ...
-
-                // The library is not build for emulators or other x86 devices
-                // by default so you may also need to add this
-                abiFilters "arm64-v8a", "armeabi-v7a"
-            }
-        }
-    }
-}
-```
-An alternative to adding `sourceSets` is simply symlinking the relevant directory
-as `jniLibs`:
-```sh
-cd your-app/src/main
-ln -s /PATH/TO/THIS/FOLDER/build/android/lib jniLibs
-```
-
-### Copyright
+## Copyright
 
 The libraries included in the suite are licensed under various open source licenses.
 Most of them are permissive licenses, but some SuiteSparse components are under copy-left licenses such as LGPL,
@@ -62,3 +53,4 @@ If you need to use these parts in commercial apps, check if the relevant SuiteSp
 components can either be removed or try to procure an alternative license from their authors.
 
 The build scripts (that is `scripts` folder) in this repository are licensed under Apache 2.0.
+The pre-built Android version `tar.gz`  file includes a copy of each license.
