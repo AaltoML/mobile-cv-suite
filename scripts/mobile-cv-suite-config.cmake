@@ -1,3 +1,4 @@
+add_library(mobile-cv-suite::core STATIC IMPORTED GLOBAL)
 add_library(mobile-cv-suite STATIC IMPORTED GLOBAL)
 
 # _MCS_ = Mobile CV Suite. Note that CMake variables are global by
@@ -18,7 +19,7 @@ set(_MCS_INTERFACE_INCLUDES
   ${_MCS_INC}
   ${_MCS_INC}/eigen3)
 
-set(_MCS_INTERFACE_LIBS
+set(_MCS_CORE_INTERFACE_LIBS
   # --- static
   ${_MCS_LIBS}/libtheia.a
 )
@@ -28,9 +29,9 @@ if((DEFINED OpenCV_DIR) AND IOS)
   message("OpenCV iOS framework")
   # Relies on custom "OpenCVConfig.cmake" placed at $OpenCV_DIR.
   find_package(OpenCV 4 REQUIRED PATHS ${OpenCV_DIR})
-  list(APPEND _MCS_INTERFACE_LIBS ${OpenCV_LIBS})
+  list(APPEND _MCS_CORE_INTERFACE_LIBS ${OpenCV_LIBS})
 else()
-  list(APPEND _MCS_INTERFACE_LIBS
+  list(APPEND _MCS_CORE_INTERFACE_LIBS
     ${_MCS_LIBS}/libopencv_videoio.${_MCS_OPENCV_LIB_EXT}
     ${_MCS_LIBS}/libopencv_video.${_MCS_OPENCV_LIB_EXT}
     ${_MCS_LIBS}/libopencv_calib3d.${_MCS_OPENCV_LIB_EXT}
@@ -54,8 +55,11 @@ else()
   set(_MCS_INCLUDE_VISUALIZATIONS FALSE)
 endif()
 
+set(_MCS_COMPONENTS mobile-cv-suite::core)
 if (_MCS_USE_SLAM)
-  list(APPEND _MCS_INTERFACE_LIBS
+  add_library(mobile-cv-suite::slam STATIC IMPORTED GLOBAL)
+  list(APPEND _MCS_COMPONENTS mobile-cv-suite::slam)
+  set(_MCS_SLAM_INTERFACE_LIBS
     # --- static
     ${_MCS_LIBS}/libamd.a
     ${_MCS_LIBS}/libcamd.a
@@ -90,35 +94,48 @@ if (_MCS_USE_SLAM)
 
   if(NOT(IOS))
     if(NOT(ANDROID))
-      list(APPEND _MCS_INTERFACE_LIBS
+      list(APPEND _MCS_SLAM_INTERFACE_LIBS
         ${_MCS_LIBS}/libmetis${CMAKE_SHARED_LIBRARY_SUFFIX}
       )
     endif()
     if (EXISTS ${_MCS_LIBS}/libopenblas.a)
-      list(APPEND _MCS_INTERFACE_LIBS
+      list(APPEND _MCS_SLAM_INTERFACE_LIBS
         ${_MCS_LIBS}/libopenblas.a
       )
     else()
       find_package(BLAS)
-      list(APPEND _MCS_INTERFACE_LIBS ${BLAS_LIBRARIES})
+      list(APPEND _MCS_SLAM_INTERFACE_LIBS ${BLAS_LIBRARIES})
     endif()
   endif()
+  set_target_properties(mobile-cv-suite::slam PROPERTIES
+          IMPORTED_LOCATION "${_MCS_LIBS}/libjsonl-recorder.a" # any library will do
+          IMPORTED_LINK_INTERFACE_LIBRARIES "${_MCS_SLAM_INTERFACE_LIBS}"
+          INTERFACE_INCLUDE_DIRECTORIES "${_MCS_INTERFACE_INCLUDES}")
 endif()
 
 if (ANDROID)
-  list(APPEND _MCS_INTERFACE_LIBS
+  list(APPEND _MCS_CORE_INTERFACE_LIBS
     ${_MCS_LIBS}/libtegra_hal.a
     z) # zlib, required by OpenCV stuff
 elseif(IOS)
   # iOS stuff here if needed
 else()
+    # not sure why OpenCV likes the folder opencv4/opencv2
+    list(APPEND _MCS_INTERFACE_INCLUDES ${_MCS_INC}/opencv4)
+
   if (_MCS_INCLUDE_VISUALIZATIONS)
+    add_library(mobile-cv-suite::visualization STATIC IMPORTED GLOBAL)
+    list(APPEND _MCS_COMPONENTS mobile-cv-suite::visualization)
     find_package(Pangolin REQUIRED PATHS "${_MCS_LIBS}/cmake/Pangolin" NO_DEFAULT_PATH)
     list(APPEND _MCS_INTERFACE_LIBS ${Pangolin_LIBRARIES})
+    set_target_properties(mobile-cv-suite::visualization PROPERTIES
+            IMPORTED_LOCATION "${_MCS_LIBS}/libjsonl-recorder.a" # any library will do
+            IMPORTED_LINK_INTERFACE_LIBRARIES "${Pangolin_LIBRARIES}"
+            INTERFACE_INCLUDE_DIRECTORIES "${_MCS_INTERFACE_INCLUDES}")
   endif()
 
   find_package(Threads REQUIRED)
-  list(APPEND _MCS_INTERFACE_LIBS
+  list(APPEND _MCS_CORE_INTERFACE_LIBS
     ${_MCS_LIBS}/libopencv_highgui${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${_MCS_LIBS}/libloguru.a
     Threads::Threads)
@@ -127,21 +144,23 @@ else()
   find_library(_MCS_DL_LIBRARY NAMES dl)
   if (EXISTS ${_MCS_DL_LIBRARY})
     message(STATUS "the dl (dynamic linking) library ${_MCS_DL_LIBRARY} exists, adding it for loguru")
-    list(APPEND _MCS_INTERFACE_LIBS ${_MCS_DL_LIBRARY})
+    list(APPEND _MCS_CORE_INTERFACE_LIBS ${_MCS_DL_LIBRARY})
   endif()
-
-  # not sure why OpenCV likes the folder opencv4/opencv2
-  list(APPEND _MCS_INTERFACE_INCLUDES ${_MCS_INC}/opencv4)
 endif()
 
 # Fortran may be needed on some platforms.
 find_library(GFORTRAN_LIBRARY NAMES gfortran)
 if (EXISTS ${GFORTRAN_LIBRARY})
   message(STATUS "gfortan found")
-  list(APPEND _MCS_INTERFACE_LIBS ${GFORTRAN_LIBRARY})
+  list(APPEND _MCS_SLAM_INTERFACE_LIBS ${GFORTRAN_LIBRARY})
 endif()
 
-set_target_properties(mobile-cv-suite PROPERTIES
+set_target_properties(mobile-cv-suite::core PROPERTIES
     IMPORTED_LOCATION "${_MCS_LIBS}/libjsonl-recorder.a" # any library will do
-    IMPORTED_LINK_INTERFACE_LIBRARIES "${_MCS_INTERFACE_LIBS}"
+    IMPORTED_LINK_INTERFACE_LIBRARIES "${_MCS_CORE_INTERFACE_LIBS}"
     INTERFACE_INCLUDE_DIRECTORIES "${_MCS_INTERFACE_INCLUDES}")
+
+set_target_properties(mobile-cv-suite PROPERTIES
+        IMPORTED_LOCATION "${_MCS_LIBS}/libjsonl-recorder.a" # any library will do
+        IMPORTED_LINK_INTERFACE_LIBRARIES "${_MCS_COMPONENTS}"
+        INTERFACE_INCLUDE_DIRECTORIES "${_MCS_INTERFACE_INCLUDES}")
