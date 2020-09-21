@@ -21,10 +21,22 @@ jobs:
     - name: Build for Android
       run: |
         BUILD_VISUALIZATIONS=OFF BUILD_EIGEN=OFF ./scripts/android/build.sh
-    - name: Package
-      run: ./scripts/package.sh
+    - name: Package (Debug)
+      run: |
+        ./scripts/package.sh
+        mv build/mobile-cv-suite.tar.gz build/mobile-cv-suite-debug.tar.gz
     - uses: actions/upload-artifact@v2
       with:
-        name: artifacts
+        name: debug
         path: |
-          build/mobile-cv-suite.tar.gz
+          build/mobile-cv-suite-debug.tar.gz
+    - name: Package (Release)
+      run: |
+        rm -rf build/android
+        mv build/android-release build/android
+        ./scripts/package.sh
+    - uses: actions/upload-artifact@v2
+      with:
+        name: release
+        path: |
+          build/mobile-cv-suite-debug.tar.gz
