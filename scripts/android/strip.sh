@@ -6,4 +6,4 @@ STRIP="$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip"
 : "${RELEASE_BUILD_DIR:=build/android-release}"
 rm -rf "$RELEASE_BUILD_DIR"
 cp -R "$DEBUG_BUILD_DIR" "$RELEASE_BUILD_DIR"
-find "$RELEASE_BUILD_DIR"/lib/ -type f | xargs -L 1 "$STRIP" -strip-debug
+find "$RELEASE_BUILD_DIR"/lib/ -type f | xargs -L 1 "$STRIP" -g
