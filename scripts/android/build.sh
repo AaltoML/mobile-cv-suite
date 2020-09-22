@@ -63,3 +63,4 @@ for TARGET_ARCHITECTURE in arm64-v8a armeabi-v7a; do
 done
 
 ./scripts/android/combine.sh
+source ./scripts/android/strip.sh
