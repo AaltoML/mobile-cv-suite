@@ -39,4 +39,4 @@ jobs:
       with:
         name: release
         path: |
-          build/mobile-cv-suite-debug.tar.gz
+          build/mobile-cv-suite.tar.gz
