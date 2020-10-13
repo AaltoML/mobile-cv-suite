@@ -22,6 +22,7 @@ set(_MCS_INTERFACE_INCLUDES
 set(_MCS_CORE_INTERFACE_LIBS
   # --- static
   ${_MCS_LIBS}/libtheia.a
+  ${_MCS_LIBS}/libaccelerated-arrays.a
 )
 
 # --- opencv
