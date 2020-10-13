@@ -11,6 +11,7 @@ $CMAKE $CMAKE_FLAGS \
     -DWITH_OPENGL_ES=ON \
     -DCMAKE_INSTALL_PREFIX="$INSTALL_PREFIX" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+    -DTEST_OPENGL_OPERATIONS=OFF \
     "$SRC_DIR/accelerated-arrays"
 $CMAKE --build . --config Release --target install $CMAKE_MAKE_FLAGS
 
