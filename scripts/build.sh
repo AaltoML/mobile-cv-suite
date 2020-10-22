@@ -86,6 +86,7 @@ fi
 
 source $SCRIPT_DIR/opencv.sh
 source $SCRIPT_DIR/jsonl-recorder.sh
+source $SCRIPT_DIR/accelerated-arrays.sh
 
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/dbow2.sh

@@ -52,6 +52,7 @@ for TARGET_ARCHITECTURE in arm64-v8a armeabi-v7a; do
   export SUITESPARSE_CF=$CXX_FLAGS
   export EXTRA_INCLUDE_DIR=$CPP_INCLUDE_DIR
 
+  export ACCELERATED_ARRAYS_CMAKE_FLAGS="-DWITH_OPENGL_ES=ON"
   export OPENBLAS_CMAKE_FLAGS="-DNOFORTRAN=1"
   # Suitesparse compilation uses this and adds incorrect stuff
   # when cross-compiling, if this is Linux or Darwin

@@ -37,3 +37,6 @@
 [submodule "cereal"]
 	path = cereal
 	url = https://github.com/USCiLab/cereal.git
+[submodule "accelerated-arrays"]
+	path = accelerated-arrays
+	url = https://github.com/AaltoML/accelerated-arrays.git
