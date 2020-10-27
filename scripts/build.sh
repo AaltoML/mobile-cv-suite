@@ -18,6 +18,7 @@ set -e
 : "${CC:=clang}"
 : "${CXX:=clang++}"
 : "${USE_SLAM:=ON}"
+: "${WITH_OPENGL:=ON}"
 : "${DO_CLEAR:=ON}"
 : "${NPROC:=4}"
 # on non-iOS platforms, pass -- -j X to set the number of thread used
