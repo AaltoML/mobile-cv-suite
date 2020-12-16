@@ -30,6 +30,7 @@ for TARGET_ARCHITECTURE in arm64; do
     -DENABLE_BITCODE=FALSE
     -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED=NO
+    -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO
     -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY=""
     -DPLATFORM=OS64
     -DTARGET_ARCH=\"$TARGET_ARCHITECTURE\""
@@ -51,6 +52,9 @@ for TARGET_ARCHITECTURE in arm64; do
 
   # Pangolin visualizations aren't needed
   export BUILD_VISUALIZATIONS=OFF
+
+  # OpenGL with accelerated-arrays not supported yet
+  export WITH_OPENGL=OFF
 
   ./scripts/build.sh "$@"
 done
