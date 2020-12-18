@@ -1,12 +1,12 @@
 #!/bin/bash
 #
 # Usage:
-#   1) Build all this library suite on the host architecture (slow, deletes previous build):
-#     ./scripts/build.bash
+#   1) Build all of the library suite on the host architecture (slow, deletes previous build):
+#     ./scripts/build.sh
 #   2) Build all dependencies for different architecture:
 #     See `scripts/android/build.sh` and `scripts/ios/build.sh`.
 #   3) (Re-)build only specific libraries:
-#     ./scripts/build.bash eigen theia
+#     ./scripts/build.sh eigen theia
 #       will build first `eigen` then `theia`, without deleting
 #       other builds.
 set -e
@@ -77,7 +77,7 @@ fi
 if [[ $USE_SLAM == "ON" ]]; then
   source $SCRIPT_DIR/yaml-cpp.sh
   if [[ -z $IOS_CROSS_COMPILING_HACKS && $OPENBLAS == "ON" ]]; then
-    # iOS uses Accelerate framework instead. Triton uses prebuilt one and has OPENBLAS == OFF.
+    # iOS uses Accelerate framework instead.
     source $SCRIPT_DIR/openblas.sh
   fi
   cd $ROOT_DIR

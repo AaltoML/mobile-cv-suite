@@ -3,6 +3,8 @@ set -ex
 : "${BUILD_EIGEN:=ON}"
 : "${USE_SLAM:=ON}"
 
+export USE_SLAM
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     : "${ANDROID_HOME:=$HOME/Android/Sdk}"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -58,7 +60,6 @@ for TARGET_ARCHITECTURE in arm64-v8a armeabi-v7a; do
   # when cross-compiling, if this is Linux or Darwin
   export UNAME=Android
   export LAPACK=''
-  export USE_SLAM
 
   ./scripts/build.sh "$@"
 done

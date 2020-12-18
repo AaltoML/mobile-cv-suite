@@ -1,5 +1,5 @@
 #!/bin/bash
-# DBoW2 (OpenVSLAM dependency)
+# DBoW2
 CUR_DIR=$WORK_DIR/DBoW2
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then

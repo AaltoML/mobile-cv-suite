@@ -1,5 +1,5 @@
 #!/bin/bash
-# g2o (OpenVSLAM dependency)
+# g2o
 CUR_DIR=$WORK_DIR/g2o
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then

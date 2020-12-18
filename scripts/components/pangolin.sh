@@ -1,5 +1,5 @@
 #!/bin/bash
-# Pangolin (for 3D visualizations)
+# Pangolin - a 3D visualization library
 CUR_DIR=$WORK_DIR/Pangolin
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then
