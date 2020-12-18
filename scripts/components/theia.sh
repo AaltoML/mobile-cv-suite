@@ -1,5 +1,5 @@
 #!/bin/bash
-# Theia (alternative RANSAC5 algorithm for tracker)
+# Theia (with reduced features and dependencies)
 CUR_DIR=$WORK_DIR/Theia
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then

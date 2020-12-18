@@ -1,5 +1,5 @@
 #!/bin/bash
-# yaml-cpp (OpenVSLAM dependency)
+# yaml-cpp
 CUR_DIR=$WORK_DIR/yaml-cpp
 
 if [[ -d "$CUR_DIR" && $DO_CLEAR == "ON" ]]; then

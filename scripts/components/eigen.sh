@@ -1,5 +1,5 @@
 #!/bin/bash
-# Eigen (used by us and the dependencies)
+# Eigen
 if [ $ANDROID_CROSS_COMPILING_HACKS ]; then
   # Eigen CMake will break if your Fortran compiler does not work, which it
   # does not if it's located in /usr/bin and you are cross-compiling for ARM.

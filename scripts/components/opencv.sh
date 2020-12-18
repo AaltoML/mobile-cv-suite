@@ -1,5 +1,5 @@
 #!/bin/bash
-# OpenCV (used by us and the dependencies)
+# OpenCV 4
 
 if [[ $IOS_CROSS_COMPILING_HACKS == "ON" ]]; then
   # Build OpenCV from source for iOS. The output is a framework folder.

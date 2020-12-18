@@ -1,15 +1,15 @@
 #!/bin/bash
-# Build all 3rd party dependencies for iOS.
 # Currently only supports arm64 architecture.
-# Can build only the specified dependencies, see `scripts/build.sh`
-# for details.
+#
+# Needs `realpath`, which can be obtained eg with `brew install coreutils`.
+#
+# Can build only the specified dependencies, see `scripts/build.sh` for details.
 
 set -e
 
-: "${USE_SLAM:=ON}"
-: "${CMAKE:=cmake}"
 : "${DO_CLEAR:=OFF}"
-: "${NPROC:=4}"
+
+export DO_CLEAR
 
 ROOT_DIR=`pwd`
 SRC_DIR=$ROOT_DIR
@@ -48,7 +48,7 @@ for TARGET_ARCHITECTURE in arm64; do
 
   export OPENCV_DIR=$BUILD_DIR/lib/opencv/build/build-$TARGET_ARCHITECTURE-iphoneos/install
 
-  export USE_SLAM
+  export USE_SLAM=ON
 
   # Pangolin visualizations aren't needed
   export BUILD_VISUALIZATIONS=OFF
