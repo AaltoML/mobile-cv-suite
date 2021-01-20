@@ -13,10 +13,10 @@ jobs:
         submodules: recursive
     - name: Install Android NDK
       run: echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669' > /dev/null 2>&1
-    - name: Install GFortran & OpenGL deps
+    - name: Install build system dependencies
       run: |
         apt-get update
-        apt-get install -y gfortran mesa-common-dev libglfw3-dev
+        apt-get install -y gfortran mesa-common-dev libglfw3-dev clang
     - name: Build for Linux
       run: |
         DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
