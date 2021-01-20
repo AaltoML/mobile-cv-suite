@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: quay.io/bitriseio/android-ndk:alpha-v2021_01_14-03_47-b2265
+      image: kunitoki/android-ndk-r21
     steps:
     - uses: actions/checkout@v2
       with:
