@@ -5,16 +5,18 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: kunitoki/android-ndk-r21
     steps:
     - uses: actions/checkout@v2
       with:
         submodules: recursive
     - name: Install Android NDK
-      run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669' > /dev/null 2>&1
-    - name: Install GFortran & OpenGL deps
+      run: echo "y" | ${ANDROID_HOME}/tools/bin/sdkmanager --install 'ndk;21.0.6113669' > /dev/null 2>&1
+    - name: Install build system dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y gfortran mesa-common-dev libglfw3-dev
+        apt-get update
+        apt-get install -y gfortran mesa-common-dev libglfw3-dev clang
     - name: Build for Linux
       run: |
         DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh

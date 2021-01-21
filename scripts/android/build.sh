@@ -15,7 +15,9 @@ else
 fi
 export ANDROID_HOME
 export ANDROID_SDK="$ANDROID_HOME"
-export ANDROID_NDK="$ANDROID_HOME/ndk-bundle"
+# not always installed into this default directory in, e.g., CI environments
+: "${ANDROID_NDK:=$ANDROID_HOME/ndk-bundle}"
+export ANDROID_NDK
 
 # Build Eigen
 # TODO: Move to component/eigen.sh
