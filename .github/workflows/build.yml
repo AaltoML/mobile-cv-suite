@@ -17,6 +17,7 @@ jobs:
       run: |
         apt-get update
         apt-get install -y gfortran mesa-common-dev libglfw3-dev clang
+        apt-get clean
     - name: Build for Linux
       run: |
         DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
