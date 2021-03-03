@@ -29,7 +29,23 @@ target_link_libraries(your_target PUBLIC mobile-cv-suite)
 
 ### Building from source
 
-First, the library needs to be built for the target system. One of
+You most likely need to install these Linux packages: `gfortran libglfw3-dev clang`
+and on some systems, you may also need some or all of the following to build the full suite, including visualizations:
+
+    libgtk2.0-dev
+    libgstreamer1.0-dev
+    libvtk6-dev
+    libavresample-dev
+    libopengl-dev # or mesa-common-dev
+    libglew-dev
+    libxkbcommon-dev
+    wayland-protocols
+    python3-distutils
+    python3-dev
+
+(Another option is using `BUILD_VISUALIZATIONS=OFF ./scripts/build.sh` to disable the visualizations)
+
+The library needs to be built for the target system. One of
 
  * `./scripts/build.sh` the host system (your computer)
  * `./script/android/build.sh` ARM-based Android phones (i.e., not emulators / x86)
