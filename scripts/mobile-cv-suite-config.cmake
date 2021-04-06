@@ -23,6 +23,7 @@ set(_MCS_CORE_INTERFACE_LIBS
   # --- static
   ${_MCS_LIBS}/libtheia.a
   ${_MCS_LIBS}/libaccelerated-arrays.a
+  ${_MCS_LIBS}/libyaml-cpp.a
 )
 
 # --- opencv
@@ -84,7 +85,6 @@ if (_MCS_USE_SLAM)
     ${_MCS_LIBS}/libg2o_types_slam2d_addons.a
     ${_MCS_LIBS}/libg2o_types_slam3d.a
     ${_MCS_LIBS}/libg2o_types_slam3d_addons.a
-    ${_MCS_LIBS}/libyaml-cpp.a
     # --- shared
     # libbtf and cxsparse are LGPL licensed, so they must be used as shared libraries
     ${_MCS_LIBS}/libbtf${CMAKE_SHARED_LIBRARY_SUFFIX}

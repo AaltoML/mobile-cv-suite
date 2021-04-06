@@ -74,8 +74,9 @@ if [[ $TARGET_ARCHITECTURE == "host" ]]; then
   source $SCRIPT_DIR/loguru/build.sh
 fi
 
+source $SCRIPT_DIR/yaml-cpp.sh
+
 if [[ $USE_SLAM == "ON" ]]; then
-  source $SCRIPT_DIR/yaml-cpp.sh
   if [[ -z $IOS_CROSS_COMPILING_HACKS && $OPENBLAS == "ON" ]]; then
     # iOS uses Accelerate framework instead.
     source $SCRIPT_DIR/openblas.sh
