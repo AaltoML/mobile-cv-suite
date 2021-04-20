@@ -19,6 +19,7 @@ set -e
 : "${CXX:=clang++}"
 : "${USE_SLAM:=ON}"
 : "${WITH_OPENGL:=ON}"
+: "${USE_OPENCV_VIDEO_RECORDING:=ON}"
 : "${DO_CLEAR:=ON}"
 : "${NPROC:=4}"
 # on non-iOS platforms, pass -- -j X to set the number of thread used
