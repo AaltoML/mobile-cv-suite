@@ -40,3 +40,6 @@
 [submodule "accelerated-arrays"]
 	path = accelerated-arrays
 	url = https://github.com/AaltoML/accelerated-arrays.git
+[submodule "PoseLib"]
+	path = PoseLib
+	url = https://github.com/vlarsson/PoseLib.git
