@@ -69,6 +69,7 @@ fi
 source $SCRIPT_DIR/eigen.sh
 source $SCRIPT_DIR/theia.sh
 source $SCRIPT_DIR/cereal.sh
+source $SCRIPT_DIR/poselib.sh
 
 if [[ $TARGET_ARCHITECTURE == "host" ]]; then
   source $SCRIPT_DIR/loguru/build.sh

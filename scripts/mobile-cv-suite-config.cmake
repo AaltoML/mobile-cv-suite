@@ -24,6 +24,7 @@ set(_MCS_CORE_INTERFACE_LIBS
   ${_MCS_LIBS}/libtheia.a
   ${_MCS_LIBS}/libaccelerated-arrays.a
   ${_MCS_LIBS}/libyaml-cpp.a
+  ${_MCS_LIBS}/libPoseLib.a
 )
 
 # --- opencv
