@@ -21,6 +21,7 @@ set -e
 : "${WITH_OPENGL:=ON}"
 : "${USE_OPENCV_VIDEO_RECORDING:=ON}"
 : "${DO_CLEAR:=ON}"
+: "${POST_CLEAR:=OFF}"
 : "${NPROC:=4}"
 # on non-iOS platforms, pass -- -j X to set the number of thread used
 # which speeds up the build. There is also a -j flag in newer CMake versions,
@@ -101,4 +102,8 @@ fi
 # Ensure all libraries are under lib/, some systems place part of them under lib64/
 if [ -d "$BUILD_DIR/lib64" ]; then
   cp -rf $BUILD_DIR/lib64/* $BUILD_DIR/lib/
+fi
+
+if [[ $POST_CLEAR == "ON" ]]; then
+  rm -rf "$WORK_DIR"
 fi
