@@ -20,10 +20,10 @@ jobs:
         apt-get clean
     - name: Build for Linux
       run: |
-        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF ./scripts/build.sh
+        DO_CLEAR=OFF BUILD_VISUALIZATIONS=OFF POST_CLEAR=ON ./scripts/build.sh
     - name: Build for Android
       run: |
-        BUILD_VISUALIZATIONS=OFF BUILD_EIGEN=OFF ./scripts/android/build.sh
+        BUILD_VISUALIZATIONS=OFF BUILD_EIGEN=OFF POST_CLEAR=ON ./scripts/android/build.sh
     - name: Package (Debug)
       run: |
         ./scripts/package.sh
