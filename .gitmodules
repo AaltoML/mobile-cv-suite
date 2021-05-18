@@ -40,3 +40,6 @@
 [submodule "accelerated-arrays"]
 	path = accelerated-arrays
 	url = https://github.com/AaltoML/accelerated-arrays.git
+[submodule "cxxopts"]
+	path = cxxopts
+	url = https://github.com/jarro2783/cxxopts.git
