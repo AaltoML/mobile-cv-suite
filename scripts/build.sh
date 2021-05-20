@@ -77,6 +77,7 @@ if [[ $TARGET_ARCHITECTURE == "host" ]]; then
 fi
 
 source $SCRIPT_DIR/yaml-cpp.sh
+source $SCRIPT_DIR/cxxopts.sh
 
 if [[ $USE_SLAM == "ON" ]]; then
   if [[ -z $IOS_CROSS_COMPILING_HACKS && $OPENBLAS == "ON" ]]; then
