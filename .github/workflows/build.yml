@@ -16,7 +16,7 @@ jobs:
     - name: Install build system dependencies
       run: |
         apt-get update
-        apt-get install -y gfortran mesa-common-dev libglfw3-dev clang
+        apt-get install -y gfortran mesa-common-dev libglfw3-dev clang python
         apt-get clean
     - name: Build for Linux
       run: |
